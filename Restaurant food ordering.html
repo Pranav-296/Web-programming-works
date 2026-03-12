@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Restaurant Food Order</title>
+
+<style>
+
+body{
+font-family: Arial;
+background:#f4f4f4;
+padding:20px;
+}
+
+.container{
+width:520px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+input, textarea, select{
+width:100%;
+padding:6px;
+margin:6px 0 12px;
+}
+
+.food-group input{
+width:auto;
+margin-right:6px;
+}
+
+button{
+background:#28a745;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+/* Hover color change handled with JS requirement */
+
+#billBox{
+position:fixed;
+right:20px;
+top:20px;
+background:white;
+border:2px solid black;
+padding:15px;
+width:180px;
+z-index:10; /* floating summary box */
+}
+
+canvas{
+margin-top:20px;
+border:1px solid black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Restaurant Food Order</h2>
+
+<h3>Customer Details</h3>
+
+Name
+<input type="text" id="name">
+
+Address
+<textarea id="address"></textarea>
+
+Phone
+<input type="text" id="phone">
+
+<h3>Food Selection</h3>
+
+Meal Type
+<input type="radio" name="meal">Veg
+<input type="radio" name="meal">Non-Veg
+<input type="radio" name="meal">Vegan
+
+<br><br>
+
+<div class="food-group">
+
+Food Items
+
+<br>
+
+<input type="checkbox" class="food">Pizza  
+<input type="checkbox" class="food">Burger  
+<input type="checkbox" class="food">Pasta  
+<input type="checkbox" class="food">Salad  
+
+</div>
+
+Quantity
+
+<select id="qty">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+<option>5</option>
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+</select>
+
+Delivery Slot
+
+<select size="3">
+<option>Morning</option>
+<option>Afternoon</option>
+<option>Evening</option>
+</select>
+
+<h3>Payment Method</h3>
+
+<input type="radio" name="pay">Cash
+<input type="radio" name="pay">Card
+<input type="radio" name="pay">UPI
+
+<br><br>
+
+<button id="orderBtn" onclick="calculateBill()">Place Order</button>
+
+<canvas id="receiptCanvas" width="320" height="120"></canvas>
+
+</div>
+
+<div id="billBox">
+<b>Bill Summary</b>
+<br><br>
+Total: <span id="total">0</span>
+</div>
+
+<script>
+
+/* Prices stored in array */
+var prices = [250,150,200,100];
+
+function calculateBill(){
+
+var foods=document.getElementsByClassName("food");
+
+var total=0;
+
+/* Using for loop to calculate total bill */
+
+for(var i=0;i<foods.length;i++){
+
+if(foods[i].checked){
+
+total = total + prices[i];
+
+}
+
+}
+
+/* Quantity multiplication */
+
+var qty=document.getElementById("qty").value;
+
+total = total * qty;
+
+/* Display total in separate div */
+
+document.getElementById("total").innerHTML = total;
+
+/* Discount condition */
+
+if(total > 1000){
+
+alert("Discount Applied! Total above ₹1000");
+
+}
+
+/* Draw receipt border using Canvas */
+
+drawReceipt();
+
+}
+
+/* Canvas receipt border */
+
+function drawReceipt(){
+
+var canvas=document.getElementById("receiptCanvas");
+
+var ctx=canvas.getContext("2d");
+
+ctx.clearRect(0,0,320,120);
+
+ctx.lineWidth=3;
+
+ctx.strokeRect(10,10,300,100);
+
+ctx.font="18px Arial";
+
+ctx.fillText("Restaurant Receipt",80,60);
+
+}
+
+/* Change button color using JS hover */
+
+var btn=document.getElementById("orderBtn");
+
+btn.addEventListener("mouseover",function(){
+
+btn.style.background="orange";
+
+});
+
+btn.addEventListener("mouseout",function(){
+
+btn.style.background="#28a745";
+
+});
+
+</script>
+
+</body>
+</html>

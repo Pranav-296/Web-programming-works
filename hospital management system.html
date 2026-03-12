@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hospital Appointment</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f0f4f8;
+padding:20px;
+}
+
+form{
+width:500px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+fieldset{
+margin-bottom:15px;
+border:1px solid #ccc;
+padding:10px;
+}
+
+legend{
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:6px;
+margin-top:5px;
+margin-bottom:10px;
+}
+
+button{
+background:#2c7be5;
+color:white;
+border:none;
+padding:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:#1a5fd0;
+}
+
+#popup{
+position:fixed;
+top:40%;
+left:40%;
+background:white;
+padding:20px;
+border:2px solid black;
+display:none;
+z-index:10;
+}
+
+</style>
+
+<script>
+
+function validateForm(){
+
+var name=document.getElementById("name").value;
+var mobile=document.getElementById("mobile").value;
+var symptoms=document.getElementById("sym").value;
+var agree=document.getElementById("agree").checked;
+
+var pattern=/^[0-9]{10}$/;
+
+if(name==""){
+alert("Name required");
+return false;
+}
+
+if(!pattern.test(mobile)){
+alert("Mobile must be 10 digits");
+return false;
+}
+
+if(symptoms.length<30){
+alert("Symptoms minimum 30 characters");
+return false;
+}
+
+if(!agree){
+alert("Accept hospital policies");
+return false;
+}
+
+document.body.style.background="lightgreen";
+document.getElementById("popup").style.display="block";
+
+return false;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<form onsubmit="return validateForm()">
+
+<fieldset>
+<legend>Personal Details</legend>
+
+Full Name
+<input type="text" id="name">
+
+Mobile
+<input type="text" id="mobile">
+
+Gender
+<input type="radio" name="g">Male
+<input type="radio" name="g">Female
+<input type="radio" name="g">Other
+
+Appointment Date
+<input type="date">
+
+</fieldset>
+
+<fieldset>
+<legend>Appointment Details</legend>
+
+Department
+<select>
+<option>Cardiology</option>
+<option>Ortho</option>
+<option>Neurology</option>
+</select>
+
+Doctors
+<select multiple>
+<option>Dr A</option>
+<option>Dr B</option>
+<option>Dr C</option>
+</select>
+
+Time Slot
+<input type="radio" name="t">Morning
+<input type="radio" name="t">Afternoon
+<input type="radio" name="t">Evening
+
+</fieldset>
+
+<fieldset>
+<legend>Symptoms</legend>
+<textarea id="sym"></textarea>
+</fieldset>
+
+<input type="checkbox" id="agree"> I agree to hospital policies
+
+<br><br>
+
+<button type="submit">Book Appointment</button>
+
+</form>
+
+<div id="popup">
+Appointment Booked Successfully
+</div>
+
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Event Booking System</title>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f2f2f2;
+padding:30px;
+}
+
+.container{
+width:550px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:8px;
+box-shadow:0 0 10px rgba(0,0,0,0.2);
+}
+
+.section{
+margin-bottom:25px;
+}
+
+label{
+display:block;
+margin-top:10px;
+margin-bottom:5px;
+}
+
+input,select{
+width:100%;
+padding:7px;
+margin-bottom:12px;
+}
+
+.radio-group input,
+.checkbox-group input{
+width:auto;
+margin-right:6px;
+}
+
+canvas{
+border:2px solid black;
+margin-top:15px;
+}
+
+h2{
+text-align:center;
+margin-bottom:25px;
+}
+
+</style>
+
+<script>
+
+var seats=[];
+
+function drawSeats(){
+
+var canvas=document.getElementById("seat");
+var ctx=canvas.getContext("2d");
+
+for(var i=0;i<5;i++){
+for(var j=0;j<5;j++){
+ctx.strokeRect(i*50,j*50,40,40);
+}
+}
+
+}
+
+function selectSeat(event){
+
+var canvas=document.getElementById("seat");
+var rect=canvas.getBoundingClientRect();
+
+var x=Math.floor((event.clientX-rect.left)/50);
+var y=Math.floor((event.clientY-rect.top)/50);
+
+var ctx=canvas.getContext("2d");
+
+ctx.fillStyle="green";
+ctx.fillRect(x*50,y*50,40,40);
+
+seats.push(x+","+y);
+
+}
+
+</script>
+
+</head>
+
+<body onload="drawSeats()">
+
+<div class="container">
+
+<h2>Event Booking System</h2>
+
+<div class="section">
+
+<h3>Personal Information</h3>
+
+<label>Name</label>
+<input type="text">
+
+<label>Email</label>
+<input type="email">
+
+<label>Phone</label>
+<input type="text">
+
+<label>Gender</label>
+<div class="radio-group">
+<input type="radio" name="g">Male
+<input type="radio" name="g">Female
+</div>
+
+</div>
+
+<div class="section">
+
+<h3>Event Selection</h3>
+
+<label>Event Type</label>
+<select>
+<option>Seminar</option>
+<option>Workshop</option>
+<option>Concert</option>
+</select>
+
+<label>Extra Services</label>
+
+<div class="checkbox-group">
+<input type="checkbox">Food
+<input type="checkbox">Kit
+<input type="checkbox">Certificate
+</div>
+
+<label>Number of Tickets</label>
+
+<select>
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+
+<label>Preferred Session</label>
+
+<select size="3">
+<option>Morning</option>
+<option>Afternoon</option>
+<option>Evening</option>
+</select>
+
+</div>
+
+<div class="section">
+
+<h3>Select Seats</h3>
+
+<canvas id="seat" width="250" height="250" onclick="selectSeat(event)"></canvas>
+
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+background:#f4f6f8;
+padding:20px;
+}
+
+fieldset{
+margin-bottom:15px;
+padding:10px;
+background:white;
+}
+
+legend{
+font-weight:bold;
+}
+
+input,select,textarea{
+width:100%;
+padding:6px;
+margin:5px 0 10px;
+}
+
+button{
+background:#6f42c1;
+color:white;
+border:none;
+padding:10px;
+}
+
+button:hover{
+background:#5936a2;
+}
+
+</style>
+
+<script>
+
+function countSkills(){
+
+var skills=document.getElementsByClassName("skill");
+var count=0;
+
+for(var i=0;i<skills.length;i++){
+if(skills[i].checked)
+count++;
+}
+
+alert("Skills Selected: "+count);
+
+}
+
+function fresherCheck(){
+document.getElementById("years").disabled=true;
+}
+
+</script>
+
+</head>
+
+<body>
+
+<fieldset>
+
+<legend>Personal Details</legend>
+
+Name
+<input type="text">
+
+Email
+<input type="email">
+
+Phone
+<input type="text">
+
+Gender
+<input type="radio">Male
+<input type="radio">Female
+
+</fieldset>
+
+<fieldset>
+
+<legend>Skills & Experience</legend>
+
+<input type="checkbox" class="skill">HTML
+<input type="checkbox" class="skill">CSS
+<input type="checkbox" class="skill">JS
+<input type="checkbox" class="skill">React
+<input type="checkbox" class="skill">Node
+
+Experience
+<input type="radio" onclick="fresherCheck()">Fresher
+<input type="radio">Experienced
+
+Years
+<input type="text" id="years">
+
+</fieldset>
+
+<fieldset>
+
+<legend>Resume</legend>
+
+Position
+<select>
+<option>Developer</option>
+<option>Tester</option>
+<option>Designer</option>
+</select>
+
+Preferred Location
+<select multiple>
+<option>Chennai</option>
+<option>Bangalore</option>
+<option>Hyderabad</option>
+</select>
+
+Cover Letter
+<textarea></textarea>
+
+</fieldset>
+
+<button onclick="countSkills()">Submit</button>
+
+<canvas id="logo" width="200" height="100"></canvas>
+
+<script>
+
+var c=document.getElementById("logo");
+var ctx=c.getContext("2d");
+
+ctx.font="20px Arial";
+ctx.fillText("IT COMPANY",30,50);
+
+</script>
+
+</body>
+</html>

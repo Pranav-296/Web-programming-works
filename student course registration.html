@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+
+body{
+font-family:Arial;
+background:#eef2f7;
+padding:20px;
+}
+
+form{
+width:500px;
+margin:auto;
+background:white;
+padding:20px;
+border-radius:8px;
+}
+
+input,select,textarea{
+width:100%;
+padding:6px;
+margin-bottom:10px;
+}
+
+button{
+background:#007bff;
+color:white;
+border:none;
+padding:10px;
+}
+
+button:hover{
+background:#0056b3;
+}
+
+</style>
+
+<script>
+
+function showRoom(){
+var hostel=document.getElementById("hostel");
+
+if(hostel.checked){
+document.getElementById("room").style.display="block";
+}
+}
+
+function validate(){
+
+var roll=document.getElementById("roll").value;
+var pattern=/^[A-Za-z]{2}[0-9]{3}$/;
+
+if(!pattern.test(roll)){
+alert("Invalid Roll Number");
+return false;
+}
+
+var courses=document.getElementById("courses");
+var count=0;
+
+for(var i=0;i<courses.options.length;i++){
+if(courses.options[i].selected)
+count++;
+}
+
+if(count<2){
+alert("Select minimum 2 courses");
+return false;
+}
+
+return true;
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<form onsubmit="return validate()">
+
+Roll Number
+<input type="text" id="roll">
+
+Name
+<input type="text">
+
+Gender
+<input type="radio">Male
+<input type="radio">Female
+
+Department
+<select>
+<option>CSE</option>
+<option>ECE</option>
+<option>IT</option>
+</select>
+
+Courses
+<select id="courses" multiple>
+<option>DS</option>
+<option>OS</option>
+<option>DAA</option>
+<option>AI</option>
+</select>
+
+<input type="checkbox">Lab Required
+
+<input type="checkbox" id="hostel" onclick="showRoom()">Hostel Required
+
+<div id="room" style="display:none">
+
+Room Preference
+<select>
+<option>Single</option>
+<option>Double</option>
+</select>
+
+</div>
+
+Feedback
+<textarea></textarea>
+
+<button type="submit">Register</button>
+
+</form>
+
+</body>
+</html>
